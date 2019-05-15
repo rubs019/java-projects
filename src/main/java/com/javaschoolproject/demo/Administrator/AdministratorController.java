@@ -10,13 +10,13 @@ public class AdministratorController {
     private AdministratorRepository administratorRepository;
 
     @PostMapping(path = "/")
-    public @ResponseBody String addNewAdministrator (@RequestBody LoginForm loginForm) {
+    public @ResponseBody String addNewAdministrator (@RequestBody Administrator administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
         Administrator n = new Administrator();
-        n.setLogin(loginForm.getName());
-        n.setPassword(loginForm.getPassword());
+        n.setLogin(administrator.getLogin());
+        n.setPassword(administrator.getPassword());
         administratorRepository.save(n);
         return "Saved";
     }
@@ -24,18 +24,5 @@ public class AdministratorController {
     @GetMapping(path = "/all")
     public @ResponseBody Iterable<Administrator> getAllAdministrator(){
         return administratorRepository.findAll();
-    }
-}
-
-class LoginForm {
-    private String name;
-    private String password;
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }
