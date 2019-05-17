@@ -2,19 +2,21 @@ package com.javaschoolproject.demo;
 
 import com.javaschoolproject.demo.Administrator.Administrator;
 import com.javaschoolproject.demo.Administrator.AdministratorController;
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
 public class AdministratorMockTests {
 
@@ -33,9 +35,8 @@ public class AdministratorMockTests {
         when(administratorController.getAllAdministrator()).thenReturn(test);
     }
 
-    @DisplayName("Test Mock helloService + helloRepository")
     @Test
-    void testGet() {
+    public void testGet() {
         assertEquals(test, administratorController.getAllAdministrator());
     }
 
