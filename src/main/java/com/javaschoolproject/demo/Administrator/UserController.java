@@ -22,7 +22,7 @@ public class UserController {
         u.setUsername("user");
         u.setPassword("mdp");
         u.setEmail("camarche@camarche.com");
-        terrainRepository.save(n);
+        terrainRepository.save(u);
         return "Saved";
     }
 
