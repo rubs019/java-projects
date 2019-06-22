@@ -1,6 +1,6 @@
 package com.javaschoolproject.demo;
 
-import com.javaschoolproject.demo.Administrator.Administrator;
+import com.javaschoolproject.demo.domaine.Administrator;
 import com.javaschoolproject.demo.Administrator.AdministratorController;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;

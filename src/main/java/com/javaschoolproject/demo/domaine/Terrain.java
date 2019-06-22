@@ -1,4 +1,4 @@
-package com.example.airsoftone.domaine;
+package com.javaschoolproject.demo.domaine;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
