@@ -11,7 +11,7 @@ public class AdministratorController {
     @Autowired
     private AdministratorRepository administratorRepository;
 
-    @PostMapping(path = "/")
+    @PostMapping(path = "")
     public @ResponseBody String addNewAdministrator (@RequestBody Administrator administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
