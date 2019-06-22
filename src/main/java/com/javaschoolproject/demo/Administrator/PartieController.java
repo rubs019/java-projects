@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/terrain")
+@RequestMapping(path="/partie")
 public class PartieController {
     @Autowired
     private PartieRepository partieRepository;
@@ -26,7 +26,7 @@ public class PartieController {
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<Partie> getAllAdministrator(){
+    public @ResponseBody Iterable<Partie> getAllPartie(){
         return terrainRepository.findAll();
     }
 }
