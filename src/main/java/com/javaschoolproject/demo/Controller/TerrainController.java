@@ -1,6 +1,6 @@
-package com.javaschoolproject.demo.Administrator;
+package com.javaschoolproject.demo.Controller;
 
-import com.javaschoolproject.demo.domaine.Terrain;
+import com.javaschoolproject.demo.models.Terrain;
 import com.javaschoolproject.demo.repository.TerrainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ public class TerrainController {
     @Autowired
     private TerrainRepository terrainRepository;
 
-    @PostMapping(path = "/")
+    @PostMapping()
     public @ResponseBody String addNewTerrain (@RequestBody Terrain administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -23,7 +23,7 @@ public class TerrainController {
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping()
     public @ResponseBody Iterable<Terrain> getAllTerrain(){
         return terrainRepository.findAll();
     }

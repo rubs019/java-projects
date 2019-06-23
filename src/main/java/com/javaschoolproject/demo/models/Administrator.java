@@ -1,4 +1,4 @@
-package com.javaschoolproject.demo.domaine;
+package com.javaschoolproject.demo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

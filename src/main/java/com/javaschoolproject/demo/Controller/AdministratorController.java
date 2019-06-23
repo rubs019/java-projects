@@ -1,6 +1,6 @@
-package com.javaschoolproject.demo.Administrator;
+package com.javaschoolproject.demo.Controller;
 
-import com.javaschoolproject.demo.domaine.Administrator;
+import com.javaschoolproject.demo.models.Administrator;
 import com.javaschoolproject.demo.repository.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +11,7 @@ public class AdministratorController {
     @Autowired
     private AdministratorRepository administratorRepository;
 
-    @PostMapping(path = "/")
+    @PostMapping()
     public @ResponseBody String addNewAdministrator (@RequestBody Administrator administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
@@ -23,7 +23,7 @@ public class AdministratorController {
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping()
     public @ResponseBody Iterable<Administrator> getAllAdministrator(){
         return administratorRepository.findAll();
     }
