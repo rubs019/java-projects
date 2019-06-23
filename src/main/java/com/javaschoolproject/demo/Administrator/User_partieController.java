@@ -6,28 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path="/user")
-public class UserController {
+@RequestMapping(path="/user_partie")
+public class RepliqueController {
     @Autowired
-    private UserRepository userRepository;
+    private User_partieRepository user_partieRepository;
 
     @PostMapping(path = "/")
-    public @ResponseBody String addNewTerrain (@RequestBody User administrator) {
+    public @ResponseBody String addNewUser_partie (@RequestBody User_partie administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        User u = new User();
-        u.setNom("Nom");
-        u.setPrenom("test");
-        u.setUsername("user");
-        u.setPassword("mdp");
-        u.setEmail( "camarche@camarche.com");
-        terrainRepository.save(u);
+        User_partie u = new User_partie();
+        u.id_user(1);
+        u.id_partie(1;
+        user_partieRepository.save(u);
         return "Saved";
     }
 
     @GetMapping(path = "/all")
-    public @ResponseBody Iterable<User> getAllUser(){
-        return userRepository.findAll();
+    public @ResponseBody Iterable<User_partie> getAllUser_partie(){
+        return stockUser_partie.findAll();
     }
 }
