@@ -1,7 +1,7 @@
 package com.javaschoolproject.demo;
 
-import com.javaschoolproject.demo.domaine.Administrator;
-import com.javaschoolproject.demo.Administrator.AdministratorController;
+import com.javaschoolproject.demo.models.Administrator;
+import com.javaschoolproject.demo.Controller.AdministratorController;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ public class AdministratorMockTests {
     @Mock
     private AdministratorController administratorController;
 
-    @InjectMocks // auto inject Administrator
+    @InjectMocks // auto inject Controller
     private List<Administrator> test = new ArrayList<>();
 
     @BeforeEach
@@ -37,7 +37,7 @@ public class AdministratorMockTests {
 
     @Test
     public void testGet() {
-        assertEquals(test, administratorController.getAllAdministrator());
+        assertEquals("", administratorController.getAllAdministrator());
     }
 
 }

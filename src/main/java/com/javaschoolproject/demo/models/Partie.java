@@ -1,19 +1,20 @@
-package com.javaschoolproject.demo.domaine;
+package com.javaschoolproject.demo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
-public class Partie implements Serializable {
+public class Partie {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
 
     private Long id;
     private Date date;
+    @Size(min = 3, max = 20)
     private String nom;
     private int place;
     private int stock;
