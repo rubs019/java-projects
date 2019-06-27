@@ -1,29 +1,27 @@
-package com.javaschoolproject.demo.Administrator;
+package com.javaschoolproject.demo.Controller;
 
-import com.javaschoolproject.demo.domaine.Terrain;
-import com.javaschoolproject.demo.repository.TerrainRepository;
+import com.javaschoolproject.demo.models.Stock;
+import com.javaschoolproject.demo.repository.StockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/stock")
-public class RepliqueController {
+public class StockController {
     @Autowired
     private StockRepository stockRepository;
 
     @PostMapping(path = "/")
-    public @ResponseBody String addNewStock (@RequestBody Stock administrator) {
-        // @ResponseBody means the returned String is the response, not a view name
-        // @RequestParam means it is a parameter from the GET or POST request
+    public @ResponseBody String addNewStock (@RequestBody Stock stock) {
 
         Stock s = new Stock();
-        s.id_replique(1);
-        s.quantite(50);
+        s.setId_replique(1);
+        s.setQuantite(50);
         stockRepository.save(s);
         return "Saved";
     }
 
-    @GetMapping(path = "/all")
+    @GetMapping()
     public @ResponseBody Iterable<Stock> getAllStock(){
         return stockRepository.findAll();
     }
