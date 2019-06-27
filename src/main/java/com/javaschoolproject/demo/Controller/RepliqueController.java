@@ -1,7 +1,7 @@
-package com.javaschoolproject.demo.Administrator;
+package com.javaschoolproject.demo.Controller;
 
-import com.javaschoolproject.demo.domaine.Terrain;
-import com.javaschoolproject.demo.repository.TerrainRepository;
+import com.javaschoolproject.demo.models.Replique;
+import com.javaschoolproject.demo.repository.RepliqueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +12,7 @@ public class RepliqueController {
     private RepliqueRepository repliqueRepository;
 
     @PostMapping(path = "/")
-    public @ResponseBody String addNewReplique (@RequestBody Replique administrator) {
+    public String addNewReplique (@RequestBody Replique administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 

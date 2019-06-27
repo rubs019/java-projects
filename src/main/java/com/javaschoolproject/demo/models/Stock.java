@@ -1,4 +1,4 @@
-package com.javaschoolproject.demo.domaine;
+package com.javaschoolproject.demo.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ public class Stock implements Serializable {
 
     private Long id;
     private int id_replique;
-    private int quantite
+    private int quantite;
 
     public Stock(){
 

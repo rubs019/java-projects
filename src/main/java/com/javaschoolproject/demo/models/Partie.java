@@ -11,7 +11,6 @@ import java.sql.Date;
 public class Partie {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
-
     private Long id;
     private Date date;
     @Size(min = 3, max = 20)
