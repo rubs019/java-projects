@@ -12,7 +12,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping()
-    public @ResponseBody String addNewTerrain (@RequestBody User administrator) {
+    public String addNewTerrain (@RequestBody User administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
@@ -27,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping()
-    public @ResponseBody Iterable<User> getAllUser(){
+    public Iterable<User> getAllUser(){
         return userRepository.findAll();
     }
 }

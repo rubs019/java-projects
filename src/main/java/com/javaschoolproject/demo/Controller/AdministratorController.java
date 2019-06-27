@@ -12,7 +12,7 @@ public class AdministratorController {
     private AdministratorRepository administratorRepository;
 
     @PostMapping()
-    public @ResponseBody String addNewAdministrator (@RequestBody Administrator administrator) {
+    public String addNewAdministrator (@RequestBody Administrator administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
@@ -24,7 +24,7 @@ public class AdministratorController {
     }
 
     @GetMapping()
-    public @ResponseBody Iterable<Administrator> getAllAdministrator(){
+    public Iterable<Administrator> getAllAdministrator(){
         return administratorRepository.findAll();
     }
 }

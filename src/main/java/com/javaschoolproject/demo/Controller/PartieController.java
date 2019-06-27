@@ -23,7 +23,6 @@ public class PartieController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody
     void createPartie(@Valid @RequestBody Partie partie, HttpServletResponse response, HttpServletRequest request) {
 
         Partie createdPartie = partieService.createPartie(partie);
@@ -31,8 +30,7 @@ public class PartieController {
     }
 
     @GetMapping()
-    public @ResponseBody
-    Iterable<Partie> getAllPartie() {
+    public Iterable<Partie> getAllPartie() {
         return partieService.findAllPartie();
     }
 }
