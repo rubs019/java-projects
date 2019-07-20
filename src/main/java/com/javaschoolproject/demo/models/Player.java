@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class User implements Serializable {
+public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
 
@@ -18,7 +18,7 @@ public class User implements Serializable {
     private String password;
     private String email;
 
-    public User(String username, String nom, String prenom, String password, String email) {
+    public Player(String username, String nom, String prenom, String password, String email) {
         this.username = username;
         this.nom = nom;
         this.prenom = prenom;
@@ -26,7 +26,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public User(){
+    public Player(){
 
     }
 

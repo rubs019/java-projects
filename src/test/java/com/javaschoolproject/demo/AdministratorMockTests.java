@@ -1,7 +1,5 @@
 package com.javaschoolproject.demo;
 
-import com.javaschoolproject.demo.models.Administrator;
-import com.javaschoolproject.demo.Controller.AdministratorController;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;

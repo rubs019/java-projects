@@ -1,30 +1,30 @@
 package com.javaschoolproject.demo.Controller;
 
-import com.javaschoolproject.demo.models.Terrain;
-import com.javaschoolproject.demo.repository.TerrainRepository;
+import com.javaschoolproject.demo.models.Field;
+import com.javaschoolproject.demo.repository.FieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="/terrain")
-public class TerrainController {
+public class FieldController {
     @Autowired
-    private TerrainRepository terrainRepository;
+    private FieldRepository fieldRepository;
 
     @PostMapping()
-    public String addNewTerrain (@RequestBody Terrain administrator) {
+    public String addNewTerrain (@RequestBody Field administrator) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
 
-        Terrain n = new Terrain();
+        Field n = new Field();
         n.setNom("Nom");
         n.setLocalisation("14 Avenue Louis Pasteur");
-        terrainRepository.save(n);
+        fieldRepository.save(n);
         return "Saved";
     }
 
     @GetMapping()
-    public Iterable<Terrain> getAllTerrain(){
-        return terrainRepository.findAll();
+    public Iterable<Field> getAllTerrain(){
+        return fieldRepository.findAll();
     }
 }

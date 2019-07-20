@@ -1,9 +1,9 @@
 package com.javaschoolproject.demo.repository;
 
-import com.javaschoolproject.demo.models.Administrator;
+import com.javaschoolproject.demo.models.Player;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdministratorRepository extends CrudRepository<Administrator, Integer> {
+public interface PlayerRepository extends CrudRepository<Player, Integer> {
 }

@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.sql.Date;
 
 @Entity
-public class Partie {
+public class Game {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
     private Long id;
@@ -18,11 +18,11 @@ public class Partie {
     private int place;
     private int stock;
 
-    public Partie(){
+    public Game(){
 
     }
 
-    public Partie(Date date, String nom, int place, int stock) {
+    public Game(Date date, String nom, int place, int stock) {
         this.date = date;
         this.nom = nom;
         this.place = place;
