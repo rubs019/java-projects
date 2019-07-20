@@ -2,6 +2,7 @@ package com.javaschoolproject.demo.Controller;
 
 import com.javaschoolproject.demo.models.Player;
 import com.javaschoolproject.demo.models.Squad;
+import com.javaschoolproject.demo.services.PlayerService;
 import com.javaschoolproject.demo.services.SquadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path="/squads")
@@ -58,13 +60,26 @@ public class SquadController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/players")
+    public ResponseEntity<Set<Player>> getPlayers(@PathVariable String id) {
+        Optional<Squad> foundSquad = squadService.findSquadById(Integer.parseInt(id));
+        if(!foundSquad.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(foundSquad.get().getPlayers());
+    }
+
     @PostMapping("/{id}/players")
     public ResponseEntity<Squad> addNewPlayer(@Valid @RequestBody Player player, HttpServletRequest request, @PathVariable String id) {
         Optional<Squad> foundSquad = squadService.findSquadById(Integer.parseInt(id));
         if(!foundSquad.isPresent()){
             return ResponseEntity.notFound().build();
         }
+
         Squad updatedSquad = squadService.addPlayer(foundSquad.get(), player);
+        player.setSquad(updatedSquad);
+        PlayerService playerService = new PlayerService();
+        playerService.updatePlayer(player);
         return ResponseEntity.ok(updatedSquad);
     }
 

@@ -12,7 +12,8 @@ public class Squad implements Serializable {
     private Integer id;
     @NotNull
     private String name;
-    @OneToMany(mappedBy = "squad", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "squad", cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<Player> players;
 
     public Squad() {

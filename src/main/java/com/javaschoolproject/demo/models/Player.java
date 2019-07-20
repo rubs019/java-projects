@@ -1,5 +1,7 @@
 package com.javaschoolproject.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -18,8 +20,9 @@ public class Player implements Serializable {
     private String firstName;
     @NotNull
     private String email;
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="squad_id")
+    @JsonIgnore
     private Squad squad;
 
     public Player(String username, String lastName, String firstName,String email) {
