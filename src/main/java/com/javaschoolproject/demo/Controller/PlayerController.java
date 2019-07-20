@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
@@ -20,7 +19,6 @@ public class PlayerController {
     private PlayerService playerService;
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public ResponseEntity<Player> addNewPlayer (@Valid @RequestBody Player player, HttpServletRequest request) {
         // @ResponseBody means the returned String is the response, not a view name
@@ -42,5 +40,21 @@ public class PlayerController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(foundPlayer.get());
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePlayer(@PathVariable String id) {
+        playerService.deletePlayer(Integer.parseInt(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Player> updatePlayerById(@RequestBody Player player, @PathVariable String id) {
+        Optional<Player> foundPlayer = playerService.findPlayerById(Integer.parseInt(id));
+        if(!foundPlayer.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        player.setId(foundPlayer.get().getId());
+        playerService.updatePlayer(player);
+        return ResponseEntity.noContent().build();
     }
 }
