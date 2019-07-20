@@ -16,7 +16,7 @@ public class GameController {
     private GameService gameService;
 
     @Autowired
-    public void PartieService(GameService gameService) {
+    public void GameService(GameService gameService) {
         this.gameService = gameService;
     }
 
