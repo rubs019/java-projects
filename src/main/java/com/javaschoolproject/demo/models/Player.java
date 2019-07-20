@@ -1,9 +1,6 @@
 package com.javaschoolproject.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -21,6 +18,9 @@ public class Player implements Serializable {
     private String firstName;
     @NotNull
     private String email;
+    @ManyToOne
+    @JoinColumn
+    private Squad squad;
 
     public Player(String username, String lastName, String firstName,String email) {
         this.username = username;
@@ -71,5 +71,13 @@ public class Player implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Squad getSquad() {
+        return squad;
+    }
+
+    public void setSquad(Squad squad) {
+        this.squad = squad;
     }
 }
