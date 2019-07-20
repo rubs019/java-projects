@@ -24,12 +24,12 @@ public class GameController {
     @ResponseStatus(HttpStatus.CREATED)
     void createPartie(@Valid @RequestBody Game game, HttpServletResponse response, HttpServletRequest request) {
 
-        Game createdGame = gameService.createPartie(game);
+        Game createdGame = gameService.createGame(game);
         response.setHeader("Location", request.getRequestURL().append("/").append(createdGame.getId()).toString());
     }
 
     @GetMapping()
     public Iterable<Game> getAllPartie() {
-        return gameService.findAllPartie();
+        return gameService.findAllGame();
     }
 }

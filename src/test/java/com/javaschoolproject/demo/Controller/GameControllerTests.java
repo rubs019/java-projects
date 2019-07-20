@@ -44,7 +44,7 @@ public class GameControllerTests {
 
     @Test
     public void success_get() throws Exception {
-        Mockito.when(gameService.findAllPartie()).thenReturn(new ArrayList<>());
+        Mockito.when(gameService.findAllGame()).thenReturn(new ArrayList<>());
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/partie"))
@@ -62,7 +62,7 @@ public class GameControllerTests {
         game.setPlace(32);
 
 
-        Mockito.when(gameService.createPartie(game)).thenReturn(game);
+        Mockito.when(gameService.createGame(game)).thenReturn(game);
 
         mockMvc.perform(
                 MockMvcRequestBuilders.post("/game")
@@ -72,7 +72,7 @@ public class GameControllerTests {
                 .andExpect(header().string("location", containsString("http://localhost/partie/")));
 
 
-        verify(gameService, times(1)).createPartie(game);
+        verify(gameService, times(1)).createGame(game);
         verifyNoMoreInteractions(gameService);
     }
 
@@ -81,7 +81,7 @@ public class GameControllerTests {
 
         Game game = new Game();
         game.setNom("2");
-        Mockito.when(gameService.createPartie(game)).thenReturn(game);
+        Mockito.when(gameService.createGame(game)).thenReturn(game);
         Mockito.when(gameRepository.save(game)).thenReturn(game);
 
         mockMvc.perform(
@@ -91,7 +91,7 @@ public class GameControllerTests {
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
 
-        verify(gameService, times(1)).createPartie(game);
+        verify(gameService, times(1)).createGame(game);
         verify(gameRepository, times(1)).findAll();
     }
 
