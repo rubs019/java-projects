@@ -7,29 +7,19 @@ import javax.persistence.Id;
 import java.io.Serializable;
 
 @Entity
-public class Terrain implements Serializable {
+public class Day implements Serializable {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
 
     private Long id;
     private String nom;
-    private String localisation;
 
-    public Terrain(){
+    public Day(){
 
     }
 
-    public Terrain(String nom, String localisation) {
+    public Day(String nom) {
         this.nom = nom;
-        this.localisation = localisation;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNom() {
@@ -38,13 +28,5 @@ public class Terrain implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public String getLocalisation() {
-        return localisation;
-    }
-
-    public void setLocalisation(String localisation) {
-        this.localisation = localisation;
     }
 }

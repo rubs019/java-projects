@@ -1,16 +1,12 @@
 package com.javaschoolproject.demo.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javaschoolproject.demo.models.Partie;
-import com.javaschoolproject.demo.repository.PartieRepository;
-import com.javaschoolproject.demo.services.PartieService;
-import org.junit.Before;
+import com.javaschoolproject.demo.models.Game;
+import com.javaschoolproject.demo.repository.GameRepository;
+import com.javaschoolproject.demo.services.GameService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -36,20 +31,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class PartieControllerTests {
+public class GameControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private PartieService partieService;
+    private GameService gameService;
 
     @MockBean
-    private PartieRepository partieRepository;
+    private GameRepository gameRepository;
 
     @Test
     public void success_get() throws Exception {
-        Mockito.when(partieService.findAllPartie()).thenReturn(new ArrayList<>());
+        Mockito.when(gameService.findAllPartie()).thenReturn(new ArrayList<>());
 
         mockMvc.perform(MockMvcRequestBuilders
                 .get("/partie"))
@@ -60,44 +55,44 @@ public class PartieControllerTests {
 
     @Test
     public void success_on_partie_creation() throws Exception {
-        Partie partie = new Partie();
-        partie.setNom("test");
-        partie.setStock(2);
-        partie.setDate(new Date(716940000));
-        partie.setPlace(32);
+        Game game = new Game();
+        game.setNom("test");
+        game.setStock(2);
+        game.setDate(new Date(716940000));
+        game.setPlace(32);
 
 
-        Mockito.when(partieService.createPartie(partie)).thenReturn(partie);
+        Mockito.when(gameService.createPartie(game)).thenReturn(game);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/partie")
+                MockMvcRequestBuilders.post("/game")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(partie)))
+                        .content(asJsonString(game)))
                 .andExpect(status().isCreated())
                 .andExpect(header().string("location", containsString("http://localhost/partie/")));
 
 
-        verify(partieService, times(1)).createPartie(partie);
-        verifyNoMoreInteractions(partieService);
+        verify(gameService, times(1)).createPartie(game);
+        verifyNoMoreInteractions(gameService);
     }
 
     @Test
     public void failed_when_name_is_too_short() throws Exception {
 
-        Partie partie = new Partie();
-        partie.setNom("2");
-        Mockito.when(partieService.createPartie(partie)).thenReturn(partie);
-        Mockito.when(partieRepository.save(partie)).thenReturn(partie);
+        Game game = new Game();
+        game.setNom("2");
+        Mockito.when(gameService.createPartie(game)).thenReturn(game);
+        Mockito.when(gameRepository.save(game)).thenReturn(game);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/partie")
+                MockMvcRequestBuilders.post("/game")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(partie)))
+                        .content(asJsonString(game)))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
 
-        verify(partieService, times(1)).createPartie(partie);
-        verify(partieRepository, times(1)).findAll();
+        verify(gameService, times(1)).createPartie(game);
+        verify(gameRepository, times(1)).findAll();
     }
 
     public static String asJsonString(final Object obj) {
