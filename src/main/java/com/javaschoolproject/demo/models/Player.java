@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -11,18 +12,20 @@ public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
 
-    private Long id;
+    private Integer id;
+    @NotNull
     private String username;
-    private String nom;
-    private String prenom;
-    private String password;
+    @NotNull
+    private String lastName;
+    @NotNull
+    private String firstName;
+    @NotNull
     private String email;
 
-    public Player(String username, String nom, String prenom, String password, String email) {
+    public Player(String username, String lastName, String firstName,String email) {
         this.username = username;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.password = password;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.email = email;
     }
 
@@ -30,11 +33,11 @@ public class Player implements Serializable {
 
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -46,28 +49,20 @@ public class Player implements Serializable {
         this.username = username;
     }
 
-    public String getNom() {
-        return nom;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPrenom() {
-        return prenom;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getEmail() {
