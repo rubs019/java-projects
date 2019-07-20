@@ -30,7 +30,7 @@ public class MeteoController {
                     HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         } catch (Exception e) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "Exception not handle", e);
+                    HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), e);
         }
     }
 }
