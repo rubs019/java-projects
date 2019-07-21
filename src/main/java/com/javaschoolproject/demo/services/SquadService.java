@@ -34,8 +34,8 @@ public class SquadService {
     public void updateSquad(Squad squad){
         squadRepository.save(squad);
     }
-    public Squad addPlayer(Squad squad, Player player){
+    public void addPlayer(Squad squad, Player player){
         squad.getPlayers().add(player);
-        return squadRepository.save(squad);
+        squadRepository.save(squad);
     }
 }

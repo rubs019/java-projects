@@ -1,5 +1,7 @@
 package com.javaschoolproject.demo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -12,9 +14,15 @@ public class Squad implements Serializable {
     private Integer id;
     @NotNull
     private String name;
+
     @OneToMany(mappedBy = "squad", cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Set<Player> players;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="team_id")
+    @JsonIgnore
+    private Team team;
 
     public Squad() {
     }
@@ -46,5 +54,13 @@ public class Squad implements Serializable {
 
     public void setPlayers(Set<Player> players) {
         this.players = players;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

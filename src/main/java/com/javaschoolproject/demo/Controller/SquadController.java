@@ -41,9 +41,7 @@ public class SquadController {
     @GetMapping("/{id}")
     public ResponseEntity<Squad> getSquadById(@PathVariable String id) {
         Optional<Squad> foundSquad = squadService.findSquadById(Integer.parseInt(id));
-        if(!foundSquad.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
+        if(!foundSquad.isPresent()) return ResponseEntity.notFound().build();
         return ResponseEntity.ok(foundSquad.get());
     }
 
@@ -79,10 +77,9 @@ public class SquadController {
             return ResponseEntity.notFound().build();
         }
 
-        Squad updatedSquad = squadService.addPlayer(foundSquad.get(), player);
-        player.setSquad(updatedSquad);
+        player.setSquad(foundSquad.get());
         playerService.updatePlayer(player);
-        return ResponseEntity.ok(updatedSquad);
+        return ResponseEntity.ok(foundSquad.get());
     }
 
 }
