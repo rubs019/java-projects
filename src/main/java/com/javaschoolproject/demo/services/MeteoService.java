@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 public class MeteoService {
 
@@ -17,22 +19,22 @@ public class MeteoService {
     @Value("${api_key_optional}")
     private String API_KEY;
 
-    public MeteoDto getMeteoWithCityId(String id) throws ApiNotFoundException {
-
+    public MeteoDto getMeteoWithCityId(Optional<String> id) throws ApiNotFoundException {
         RestTemplate restTemplate = new RestTemplate();
+        String idParisWeather = "2988507";
 
         logger.info("API_KEY : ".concat(API_KEY));
         if(API_KEY == null)
             throw new ApiNotFoundException();
 
-        MeteoDto meteoDto = restTemplate.getForObject(
-                "https://api.openweathermap.org/data/2.5/weather?id="
-                        .concat(id)
-                        .concat("&appid=")
-                        .concat(API_KEY),
-                MeteoDto.class);
+        String finalId = id.orElse(idParisWeather);
 
-        return meteoDto;
+        return restTemplate.getForObject(
+            "https://api.openweathermap.org/data/2.5/weather?id="
+                    .concat(finalId)
+                    .concat("&appid=")
+                    .concat(API_KEY),
+            MeteoDto.class);
     }
 
 }

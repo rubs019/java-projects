@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path = "/meteo")
 public class MeteoController {
@@ -20,7 +22,7 @@ public class MeteoController {
     private MeteoService meteoService;
 
     @GetMapping()
-    private MeteoDto getMeteoWithCityId(@RequestParam("id") String id) {
+    private MeteoDto getMeteoWithCityId(@RequestParam("id") Optional<String> id) {
         try {
             MeteoDto meteoDto = meteoService.getMeteoWithCityId(id);
             logger.info(meteoDto.toString());
