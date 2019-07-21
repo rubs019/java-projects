@@ -25,13 +25,13 @@ public class GameServiceTests {
     public void testCreatePartie() {
         /*Game partie = new Game();
         partie.setStock(TEST_STOCK_QUANTITY);
-        partie.setNom(TEST_NAME);
+        partie.setName(TEST_NAME);
         partie.setPlace(TEST_STOCK_QUANTITY);
         Mockito.when(partieRepository.save(partie)).thenReturn(partie);
 
         Game partieCreated = testingObject.createPartie(partie);
         Assert.assertEquals(TEST_STOCK_QUANTITY, partieCreated.getStock());
-        Assert.assertEquals(TEST_NAME, partieCreated.getNom());
+        Assert.assertEquals(TEST_NAME, partieCreated.getName());
         Assert.assertEquals(TEST_PLACE_AVAILABLE, partieCreated.getPlace());*/
     }
 }

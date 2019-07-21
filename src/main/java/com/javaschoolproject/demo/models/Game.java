@@ -4,29 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Date;
 
 @Entity
 public class Game {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
     private Long id;
-    private Date date;
     @Size(min = 3, max = 20)
-    private String nom;
-    private int place;
-    private int stock;
+    private String name;
+    @NotNull
+    private String description;
 
     public Game(){
 
     }
 
-    public Game(Date date, String nom, int place, int stock) {
-        this.date = date;
-        this.nom = nom;
-        this.place = place;
-        this.stock = stock;
+    public Game( String name, String description) {
+        this.name = name;
+        this.description = description;
     }
 
     public Long getId() {
@@ -37,35 +34,19 @@ public class Game {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public String getName() {
+        return name;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNom() {
-        return nom;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public int getPlace() {
-        return place;
-    }
-
-    public void setPlace(int place) {
-        this.place = place;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
