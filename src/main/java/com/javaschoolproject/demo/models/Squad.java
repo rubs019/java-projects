@@ -1,17 +1,19 @@
 package com.javaschoolproject.demo.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Random;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 public class Squad implements Serializable {
     @Id
-    @GeneratedValue(strategy  = GenerationType.AUTO)
-    private Integer id;
+    private UUID id;
     @NotNull
     private String name;
 
@@ -25,18 +27,20 @@ public class Squad implements Serializable {
     private Team team;
 
     public Squad() {
+        this.setId(UUID.randomUUID());
     }
 
     public Squad(@NotNull String name, Set<Player> players) {
+        this.setId(UUID.randomUUID());
         this.name = name;
         this.players = players;
     }
 
-    public Integer getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -62,5 +66,9 @@ public class Squad implements Serializable {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public void cleanPlayers() {
+        players.clear();
     }
 }

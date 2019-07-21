@@ -26,6 +26,16 @@ public class Day implements Serializable {
     @JsonIgnore
     private Field field;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="team_id")
+    @JsonIgnore
+    private Team team;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="game_id")
+    @JsonIgnore
+    private Game game;
+
     public Day() {
     }
 
@@ -71,5 +81,21 @@ public class Day implements Serializable {
 
     public void setField(Field field) {
         this.field = field;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
     }
 }

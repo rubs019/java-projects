@@ -1,11 +1,9 @@
 package com.javaschoolproject.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 public class Game {
@@ -17,9 +15,13 @@ public class Game {
     @NotNull
     private String description;
 
-    public Game(){
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Day> day;
 
-    }
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Goal> goal;
+
+    public Game(){ }
 
     public Game( String name, String description) {
         this.name = name;
@@ -48,5 +50,21 @@ public class Game {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Goal> getGoal() {
+        return goal;
+    }
+
+    public void setGoal(Set<Goal> goal) {
+        this.goal = goal;
+    }
+
+    public Set<Day> getDay() {
+        return day;
+    }
+
+    public void setDay(Set<Day> day) {
+        this.day = day;
     }
 }

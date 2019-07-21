@@ -1,9 +1,8 @@
 package com.javaschoolproject.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -13,6 +12,11 @@ public class Goal implements Serializable {
     private Long id;
     private String nom;
     private String type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="game_id")
+    @JsonIgnore
+    private Game game;
 
     public Goal(){
 
