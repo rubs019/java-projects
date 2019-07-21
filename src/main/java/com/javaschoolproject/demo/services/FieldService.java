@@ -5,6 +5,8 @@ import com.javaschoolproject.demo.repository.FieldRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class FieldService {
 
@@ -19,7 +21,17 @@ public class FieldService {
         return fieldRepository.save(field);
     }
 
-    public Iterable<Field> findAllGame() {
+    public Iterable<Field> findAllField() {
         return fieldRepository.findAll();
+    }
+
+    public Optional<Field> findFieldById(Integer id) {
+        return fieldRepository.findById(id);
+    }
+    public void deleteField(Integer id){
+        fieldRepository.deleteById(id);
+    }
+    public void updateField(Field field){
+        fieldRepository.save(field);
     }
 }
