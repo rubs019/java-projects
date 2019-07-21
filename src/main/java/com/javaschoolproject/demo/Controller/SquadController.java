@@ -2,6 +2,7 @@ package com.javaschoolproject.demo.Controller;
 
 import com.javaschoolproject.demo.models.Player;
 import com.javaschoolproject.demo.models.Squad;
+import com.javaschoolproject.demo.repository.PlayerRepository;
 import com.javaschoolproject.demo.services.PlayerService;
 import com.javaschoolproject.demo.services.SquadService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import java.util.Set;
 public class SquadController {
     @Autowired
     private SquadService squadService;
+    @Autowired
+    private PlayerService playerService;
 
     @PostMapping()
     @ResponseBody
@@ -78,7 +81,6 @@ public class SquadController {
 
         Squad updatedSquad = squadService.addPlayer(foundSquad.get(), player);
         player.setSquad(updatedSquad);
-        PlayerService playerService = new PlayerService();
         playerService.updatePlayer(player);
         return ResponseEntity.ok(updatedSquad);
     }

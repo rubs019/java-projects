@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GoalController {
-
-    private GoalRepository goalRepository;
+public class GoalService {
 
     @Autowired
+    private GoalRepository goalRepository;
+
     public void GoalRepository(GoalRepository goalRepository) {
         this.goalRepository = goalRepository;
     }

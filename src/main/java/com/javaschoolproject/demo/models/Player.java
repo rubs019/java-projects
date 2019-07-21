@@ -10,7 +10,6 @@ import java.io.Serializable;
 public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy  = GenerationType.AUTO)
-
     private Integer id;
     @NotNull
     private String username;

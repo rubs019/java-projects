@@ -9,12 +9,8 @@ import java.util.Optional;
 
 @Service
 public class PlayerService {
-    private PlayerRepository playerRepository;
-
     @Autowired
-    public void PlayerRepository(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
-    }
+    private PlayerRepository playerRepository;
 
     public Player createPlayer(Player game) {
         return playerRepository.save(game);

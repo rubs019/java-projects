@@ -2,7 +2,7 @@ package com.javaschoolproject.demo.Controller;
 
 import com.javaschoolproject.demo.models.Field;
 import com.javaschoolproject.demo.models.Goal;
-import com.javaschoolproject.demo.repository.GoalRepository;
+import com.javaschoolproject.demo.services.GoalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path="/objectif")
 public class GoalController {
     @Autowired
-    private GoalRepository goalRepository;
+    private GoalService goalService;
 
     @PostMapping()
     public String addNewGoal (@RequestBody Field administrator) {
@@ -20,12 +20,12 @@ public class GoalController {
         Goal n = new Goal();
         n.setNom("Nom");
         n.setType("capture de point");
-        goalRepository.save(n);
+        goalService.createGoal(n);
         return "Saved";
     }
 
     @GetMapping()
     public Iterable<Goal> getAllGoal(){
-        return goalRepository.findAll();
+        return goalService.findAllGoal();
     }
 }
