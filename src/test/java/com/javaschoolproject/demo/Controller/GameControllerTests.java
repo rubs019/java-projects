@@ -56,7 +56,7 @@ public class GameControllerTests {
     @Test
     public void success_on_partie_creation() throws Exception {
         Game game = new Game();
-        game.setNom("test");
+        game.setName("test");
         game.setStock(2);
         game.setDate(new Date(716940000));
         game.setPlace(32);
@@ -80,7 +80,7 @@ public class GameControllerTests {
     public void failed_when_name_is_too_short() throws Exception {
 
         Game game = new Game();
-        game.setNom("2");
+        game.setName("2");
         Mockito.when(gameService.createGame(game)).thenReturn(game);
         Mockito.when(gameRepository.save(game)).thenReturn(game);
 
