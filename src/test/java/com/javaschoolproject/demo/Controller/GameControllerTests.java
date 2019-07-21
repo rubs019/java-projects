@@ -1,4 +1,6 @@
+/*
 package com.javaschoolproject.demo.Controller;
+
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javaschoolproject.demo.models.Game;
@@ -102,5 +104,6 @@ public class GameControllerTests {
             throw new RuntimeException(e);
         }
     }
-}
 
+}
+*/
