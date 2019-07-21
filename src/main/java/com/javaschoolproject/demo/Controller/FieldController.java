@@ -1,7 +1,9 @@
 package com.javaschoolproject.demo.Controller;
 
+import com.javaschoolproject.demo.models.Day;
 import com.javaschoolproject.demo.models.Field;
 import com.javaschoolproject.demo.repository.FieldRepository;
+import com.javaschoolproject.demo.services.DayService;
 import com.javaschoolproject.demo.services.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,9 @@ import java.util.Optional;
 public class FieldController {
     @Autowired
     private FieldService fieldService;
+
+    @Autowired
+    private DayService dayService;
 
     @PostMapping()
     @ResponseBody
@@ -56,5 +61,17 @@ public class FieldController {
         field.setId(foundField.get().getId());
         fieldService.updateField(field);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/day")
+    public ResponseEntity<Field> addNewPlayer(@Valid @RequestBody Day day, HttpServletRequest request, @PathVariable String id) {
+        Optional<Field> foundField = fieldService.findFieldById(Integer.parseInt(id));
+        if(!foundField.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+
+        day.setField(foundField.get());
+        dayService.updateDay(day);
+        return ResponseEntity.ok(foundField.get());
     }
 }

@@ -1,10 +1,8 @@
 package com.javaschoolproject.demo.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Field implements Serializable {
@@ -23,6 +21,10 @@ public class Field implements Serializable {
         this.nom = nom;
         this.localisation = localisation;
     }
+
+    @OneToMany(mappedBy = "field", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<Day> days;
 
     public Long getId() {
         return id;
@@ -46,5 +48,13 @@ public class Field implements Serializable {
 
     public void setLocalisation(String localisation) {
         this.localisation = localisation;
+    }
+
+    public Set<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(Set<Day> days) {
+        this.days = days;
     }
 }
