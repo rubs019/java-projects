@@ -13,7 +13,9 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public Team createTeam(Team team){
+    public Team createTeam(String name){
+        Team team = new Team();
+        team.setName(name);
         return teamRepository.save(team);
     }
     public Iterable<Team> findAllTeam() {

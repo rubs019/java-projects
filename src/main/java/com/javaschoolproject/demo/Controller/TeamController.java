@@ -25,10 +25,10 @@ public class TeamController {
 
     @PostMapping()
     @ResponseBody
-    public ResponseEntity<Team> addNewTeam (@Valid @RequestBody Team squad, HttpServletRequest request) {
+    public ResponseEntity<Team> addNewTeam (@Valid @RequestBody String name, HttpServletRequest request) {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
-        Team createdTeam = teamService.createTeam(squad);
+        Team createdTeam = teamService.createTeam(name);
         URI location = URI.create(request.getRequestURL().append("/").append(createdTeam.getId()).toString());
         return ResponseEntity.created(location).body(createdTeam);
     }

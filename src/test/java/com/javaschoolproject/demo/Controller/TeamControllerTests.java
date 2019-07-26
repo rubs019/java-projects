@@ -1,24 +1,29 @@
 package com.javaschoolproject.demo.Controller;
 
-import com.javaschoolproject.demo.helpers.Generator;
-import com.javaschoolproject.demo.helpers.TeamBalancer;
-import com.javaschoolproject.demo.models.*;
-import com.javaschoolproject.demo.repository.TeamRepository;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.javaschoolproject.demo.models.Team;
 import com.javaschoolproject.demo.services.TeamService;
-import org.assertj.core.util.diff.Chunk;
-import org.junit.Assert;
+import org.json.JSONObject;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.*;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -28,46 +33,68 @@ public class TeamControllerTests {
         @Autowired
         private MockMvc mockMvc;
 
-        @MockBean
+        @Mock
         private TeamService teamService;
 
-        @MockBean
-        private TeamRepository teamRepository;
+        @InjectMocks // auto inject Controller
+        TeamController teamController;
 
-        @Test
-        public void TeamBalancer() {
-            Team team = new Team();
-            Set<Player> players1 = Generator.playersGenerator(1);
-            Set<Player> players2 = Generator.playersGenerator(9);
-            Squad squad1 = new Squad();
-            Squad squad2 = new Squad();
-
-            squad1.setPlayers(players1);
-            squad2.setPlayers(players2);
-            Set<Squad> squads = new HashSet<>();
-            squads.add(squad1);
-            squads.add(squad2);
-            team.setSquads(squads);
-
-            Team balancedTeam = TeamBalancer.balance(team);
-
-            balancedTeam.getSquads().forEach(squad -> {
-                Assert.assertEquals(5, squad.getPlayers().size());
-            });
+        @Before
+        public void setup() {
+            mockMvc = MockMvcBuilders.standaloneSetup(teamController).build();
         }
 
-        /*@Test
+        /*@BeforeEach
+        void setMockOutput() {
+            Team defaultTeam = new Team();
+            test.add(defaultTeam);
+            when(teamController.getAllTeams()).thenReturn(test);
+        }*/
+
+        @Test
         public void success_get() throws Exception {
-            Mockito.when(gameService.findAllGame()).thenReturn(new ArrayList<>());
 
             mockMvc.perform(MockMvcRequestBuilders
-                    .get("/partie"))
+                    .get("/teams"))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andExpect(content().json("[]"));
         }
 
         @Test
+        public void success_post() throws Exception {
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                Team team = new Team();
+                team.setName("Aigle royale");
+                JSONObject t = new JSONObject();
+                t.put("name","Aigle Royale");
+                // objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+                //objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+                String json = objectMapper.writeValueAsString(t);
+
+                mockMvc.perform(MockMvcRequestBuilders
+                        .post("/teams")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("utf-8")
+                        .content(json))
+                        .andDo(print())
+                        .andExpect(status().isCreated())
+                        .andExpect(content().json("[]"));
+        }
+
+        public static String asJsonString(final Object obj) {
+                try {
+                        final ObjectMapper mapper = new ObjectMapper();
+                        final String jsonContent = mapper.writeValueAsString(obj);
+                        System.out.println(jsonContent);
+                        return jsonContent;
+                } catch (Exception e) {
+                        throw new RuntimeException(e);
+                }
+        }
+
+        /*@Test
         public void success_on_partie_creation() throws Exception {
             Game game = new Game();
             game.setName("test");

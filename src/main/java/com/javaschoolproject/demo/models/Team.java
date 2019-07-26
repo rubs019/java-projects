@@ -26,9 +26,8 @@ public class Team {
     public Team() {
     }
 
-    public Team(@NotNull String name, Set<Squad> squads) {
+    public Team(@NotNull String name) {
         this.name = name;
-        this.squads = squads;
     }
 
     public Integer getId() {
